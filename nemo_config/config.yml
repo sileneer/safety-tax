@@ -1,0 +1,43 @@
+# NeMo Guardrails Configuration
+# See: https://docs.nvidia.com/nemo/guardrails/
+#
+# IMPORTANT: The model below must match config.TARGET_MODEL (or the
+# TARGET_MODEL env var).  NeMo uses its own config for the LLM call,
+# so changing the model in config.py alone is NOT sufficient.
+
+models:
+  - type: main
+    engine: anthropic
+    model: ${TARGET_MODEL:claude-sonnet-4-5-20250929}
+    parameters:
+      api_key: ${ANTHROPIC_API_KEY}
+      max_tokens: 1024
+
+  # Embedding model for semantic similarity checks
+  - type: embeddings
+    engine: openai
+    model: text-embedding-3-small
+    parameters:
+      api_key: ${OPENAI_API_KEY}
+
+rails:
+  input:
+    flows:
+      - check jailbreak
+      - check harmful input
+
+  output:
+    flows:
+      - check harmful output
+
+  config:
+    # Similarity threshold for embedding-based checks
+    lowest_temperature: 0.1
+    enable_multi_step_generation: false
+
+instructions:
+  - type: general
+    content: |
+      You are a helpful, harmless AI assistant. Answer questions factually and
+      concisely. Refuse any request that involves illegal activity, self-harm,
+      harassment, or generating harmful content.
