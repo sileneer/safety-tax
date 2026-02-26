@@ -23,7 +23,12 @@ TARGET_MODEL = os.getenv("TARGET_MODEL", "claude-sonnet-4-5-20250929")
 JUDGE_MODEL = os.getenv("JUDGE_MODEL", "gpt-5-2025-08-07")
 
 # ── Concurrency ───────────────────────────────────────────────────────────────
-MAX_CONCURRENCY = int(os.getenv("MAX_CONCURRENCY", "10"))
+MAX_CONCURRENCY = int(os.getenv("MAX_CONCURRENCY", "2"))
+
+# ── Rate limiting ─────────────────────────────────────────────────────────────
+# Minimum seconds between provider API calls (e.g. 15 = ~4 req/min, safely
+# under the Anthropic 5 req/min org limit).
+REQUEST_DELAY = float(os.getenv("REQUEST_DELAY", "15"))
 
 # ── Dataset sizes (per the experiment plan: n = 1000) ─────────────────────────
 ADVERSARIAL_DIRECT_COUNT = 250

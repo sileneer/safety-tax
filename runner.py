@@ -60,6 +60,30 @@ def result_to_dict(
 
 
 # ── Concurrency-limited executor ──────────────────────────────────────────────
+_rate_lock: asyncio.Lock | None = None
+_last_request_time = 0.0
+
+
+def _get_rate_lock() -> asyncio.Lock:
+    global _rate_lock
+    if _rate_lock is None:
+        _rate_lock = asyncio.Lock()
+    return _rate_lock
+
+
+async def _throttle():
+    """Enforce minimum delay between provider API calls to stay under rate limits."""
+    global _last_request_time
+    import time
+    async with _get_rate_lock():
+        now = time.monotonic()
+        elapsed = now - _last_request_time
+        wait = config.REQUEST_DELAY - elapsed
+        if wait > 0:
+            await asyncio.sleep(wait)
+        _last_request_time = time.monotonic()
+
+
 async def run_single(
     semaphore: asyncio.Semaphore,
     provider: BaseProvider,
@@ -67,6 +91,7 @@ async def run_single(
     judge: JudgeEvaluator,
 ) -> dict:
     async with semaphore:
+        await _throttle()
         result = await provider.process(case.prompt)
 
         # Judge the result

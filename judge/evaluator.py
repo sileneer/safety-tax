@@ -107,7 +107,7 @@ class JudgeEvaluator:
                     {"role": "system", "content": JUDGE_SYSTEM_PROMPT},
                     {"role": "user", "content": user_msg},
                 ],
-                max_tokens=256,
+                max_completion_tokens=256,
                 temperature=0,
             )
 
