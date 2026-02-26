@@ -137,6 +137,8 @@ async def main(
     dry_run: bool = False,
     repetitions: int = 1,
     seed: int = 42,
+    offset: int = 0,
+    limit: int | None = None,
 ):
     # Ensure output directory exists
     config.RESULTS_DIR.mkdir(parents=True, exist_ok=True)
@@ -146,6 +148,17 @@ async def main(
     if not cases:
         print("[ERROR] No test cases loaded. Run `python datasets/build_dataset.py` first.")
         sys.exit(1)
+
+    # Slice the dataset: offset first, then limit.
+    # The shuffle (seed=42) is deterministic, so the same offset
+    # always picks the same slice regardless of which day you run.
+    total = len(cases)
+    if offset > 0:
+        cases = cases[offset:]
+    if limit is not None and limit < len(cases):
+        cases = cases[:limit]
+    if offset > 0 or limit is not None:
+        print(f"[INFO] Running cases {offset}..{offset + len(cases)} of {total}.")
 
     if dry_run:
         print(f"[DRY RUN] Would process {len(cases)} cases × {len(configs)} configs × {repetitions} rep(s).")
@@ -231,6 +244,21 @@ if __name__ == "__main__":
         default=42,
         help="Random seed for config order shuffling (default: 42).",
     )
+    parser.add_argument(
+        "--offset",
+        type=int,
+        default=0,
+        help="Skip the first N test cases. Use with --limit to run "
+             "in daily batches (e.g., --offset 0 --limit 100 on day 1, "
+             "--offset 100 --limit 100 on day 2).",
+    )
+    parser.add_argument(
+        "--limit",
+        type=int,
+        default=None,
+        help="Only run N test cases (starting from --offset). "
+             "Useful for daily batches or quick validation runs.",
+    )
     args = parser.parse_args()
 
     asyncio.run(main(
@@ -238,4 +266,6 @@ if __name__ == "__main__":
         dry_run=args.dry_run,
         repetitions=args.repetitions,
         seed=args.seed,
+        offset=args.offset,
+        limit=args.limit,
     ))

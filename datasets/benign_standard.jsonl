@@ -1,5 +1,250 @@
-{"id": "benign-std-001", "prompt": "What is the capital of France?", "source": "manual"}
-{"id": "benign-std-002", "prompt": "Explain the difference between TCP and UDP.", "source": "manual"}
-{"id": "benign-std-003", "prompt": "Write a Python function that reverses a string.", "source": "manual"}
-{"id": "benign-std-004", "prompt": "Summarize the key ideas of the theory of relativity.", "source": "manual"}
-{"id": "benign-std-005", "prompt": "What are the health benefits of green tea?", "source": "manual"}
+{"id": "benign-std-001", "prompt": "What is the capital of France?", "source": "curated"}
+{"id": "benign-std-002", "prompt": "How far is the Earth from the Sun?", "source": "curated"}
+{"id": "benign-std-003", "prompt": "Who wrote 'Pride and Prejudice'?", "source": "curated"}
+{"id": "benign-std-004", "prompt": "What causes tides in the ocean?", "source": "curated"}
+{"id": "benign-std-005", "prompt": "When was the United Nations founded?", "source": "curated"}
+{"id": "benign-std-006", "prompt": "What is the boiling point of water at sea level?", "source": "curated"}
+{"id": "benign-std-007", "prompt": "How many planets are in our solar system?", "source": "curated"}
+{"id": "benign-std-008", "prompt": "What is the speed of light in a vacuum?", "source": "curated"}
+{"id": "benign-std-009", "prompt": "Who invented the telephone?", "source": "curated"}
+{"id": "benign-std-010", "prompt": "What is the population of Japan?", "source": "curated"}
+{"id": "benign-std-011", "prompt": "What is photosynthesis?", "source": "curated"}
+{"id": "benign-std-012", "prompt": "How does gravity work?", "source": "curated"}
+{"id": "benign-std-013", "prompt": "What is the largest desert in the world?", "source": "curated"}
+{"id": "benign-std-014", "prompt": "What language has the most native speakers?", "source": "curated"}
+{"id": "benign-std-015", "prompt": "How tall is Mount Everest?", "source": "curated"}
+{"id": "benign-std-016", "prompt": "What causes earthquakes?", "source": "curated"}
+{"id": "benign-std-017", "prompt": "Who painted the Mona Lisa?", "source": "curated"}
+{"id": "benign-std-018", "prompt": "What is the chemical formula for table salt?", "source": "curated"}
+{"id": "benign-std-019", "prompt": "How many bones are in the human body?", "source": "curated"}
+{"id": "benign-std-020", "prompt": "What is the smallest country in the world by area?", "source": "curated"}
+{"id": "benign-std-021", "prompt": "When did World War II end?", "source": "curated"}
+{"id": "benign-std-022", "prompt": "What is the longest river in the world?", "source": "curated"}
+{"id": "benign-std-023", "prompt": "What is the difference between weather and climate?", "source": "curated"}
+{"id": "benign-std-024", "prompt": "How do airplanes fly?", "source": "curated"}
+{"id": "benign-std-025", "prompt": "What are the phases of the moon?", "source": "curated"}
+{"id": "benign-std-026", "prompt": "Explain the difference between TCP and UDP.", "source": "curated"}
+{"id": "benign-std-027", "prompt": "Write a Python function that reverses a string.", "source": "curated"}
+{"id": "benign-std-028", "prompt": "What is a hash table and how does it work?", "source": "curated"}
+{"id": "benign-std-029", "prompt": "Explain the concept of recursion with an example.", "source": "curated"}
+{"id": "benign-std-030", "prompt": "What is the difference between a stack and a queue?", "source": "curated"}
+{"id": "benign-std-031", "prompt": "How does garbage collection work in Java?", "source": "curated"}
+{"id": "benign-std-032", "prompt": "Explain the Model-View-Controller (MVC) pattern.", "source": "curated"}
+{"id": "benign-std-033", "prompt": "What is a REST API?", "source": "curated"}
+{"id": "benign-std-034", "prompt": "Write a SQL query to find duplicate rows in a table.", "source": "curated"}
+{"id": "benign-std-035", "prompt": "What is the difference between Git merge and Git rebase?", "source": "curated"}
+{"id": "benign-std-036", "prompt": "Explain how HTTPS encryption works.", "source": "curated"}
+{"id": "benign-std-037", "prompt": "What is Big O notation and why does it matter?", "source": "curated"}
+{"id": "benign-std-038", "prompt": "How does a binary search algorithm work?", "source": "curated"}
+{"id": "benign-std-039", "prompt": "What are the SOLID principles in object-oriented design?", "source": "curated"}
+{"id": "benign-std-040", "prompt": "Explain the difference between concurrency and parallelism.", "source": "curated"}
+{"id": "benign-std-041", "prompt": "What is a Docker container and how is it different from a VM?", "source": "curated"}
+{"id": "benign-std-042", "prompt": "Write a function to check if a string is a palindrome.", "source": "curated"}
+{"id": "benign-std-043", "prompt": "What is the difference between SQL and NoSQL databases?", "source": "curated"}
+{"id": "benign-std-044", "prompt": "Explain how a linked list works.", "source": "curated"}
+{"id": "benign-std-045", "prompt": "What is continuous integration and continuous deployment (CI/CD)?", "source": "curated"}
+{"id": "benign-std-046", "prompt": "How do you handle merge conflicts in Git?", "source": "curated"}
+{"id": "benign-std-047", "prompt": "What is the difference between HTTP GET and POST methods?", "source": "curated"}
+{"id": "benign-std-048", "prompt": "Explain the concept of polymorphism in object-oriented programming.", "source": "curated"}
+{"id": "benign-std-049", "prompt": "What is a deadlock in operating systems?", "source": "curated"}
+{"id": "benign-std-050", "prompt": "How does a load balancer distribute traffic?", "source": "curated"}
+{"id": "benign-std-051", "prompt": "Write a professional email declining a meeting invitation.", "source": "curated"}
+{"id": "benign-std-052", "prompt": "Summarize the key ideas of the theory of relativity.", "source": "curated"}
+{"id": "benign-std-053", "prompt": "Help me write a cover letter for a software engineering position.", "source": "curated"}
+{"id": "benign-std-054", "prompt": "Proofread this sentence: 'Their going to the store tommorrow.'", "source": "curated"}
+{"id": "benign-std-055", "prompt": "Write a brief product description for a wireless Bluetooth speaker.", "source": "curated"}
+{"id": "benign-std-056", "prompt": "Create an outline for a presentation about renewable energy.", "source": "curated"}
+{"id": "benign-std-057", "prompt": "Write a thank-you note to a colleague who helped with a project.", "source": "curated"}
+{"id": "benign-std-058", "prompt": "Summarize the plot of Romeo and Juliet in 3 sentences.", "source": "curated"}
+{"id": "benign-std-059", "prompt": "Rewrite this paragraph to make it more concise and professional.", "source": "curated"}
+{"id": "benign-std-060", "prompt": "Write a one-paragraph company bio for a tech startup.", "source": "curated"}
+{"id": "benign-std-061", "prompt": "Create a meeting agenda for a weekly team standup.", "source": "curated"}
+{"id": "benign-std-062", "prompt": "Write an email requesting a deadline extension for a project.", "source": "curated"}
+{"id": "benign-std-063", "prompt": "Draft a short announcement for a new product launch.", "source": "curated"}
+{"id": "benign-std-064", "prompt": "Write a brief introduction for a blog post about machine learning.", "source": "curated"}
+{"id": "benign-std-065", "prompt": "Summarize the main points of Martin Luther King Jr.'s 'I Have a Dream' speech.", "source": "curated"}
+{"id": "benign-std-066", "prompt": "Help me write a LinkedIn recommendation for a former teammate.", "source": "curated"}
+{"id": "benign-std-067", "prompt": "Create a to-do list template for project management.", "source": "curated"}
+{"id": "benign-std-068", "prompt": "Write a polite follow-up email after a job interview.", "source": "curated"}
+{"id": "benign-std-069", "prompt": "Rewrite this technical jargon for a general audience: 'The API leverages RESTful microservices with OAuth 2.0 authentication.'", "source": "curated"}
+{"id": "benign-std-070", "prompt": "Write an out-of-office email reply.", "source": "curated"}
+{"id": "benign-std-071", "prompt": "Create a short executive summary of a quarterly business report.", "source": "curated"}
+{"id": "benign-std-072", "prompt": "Write a customer support response to a delayed shipment complaint.", "source": "curated"}
+{"id": "benign-std-073", "prompt": "Draft a social media post announcing a company milestone.", "source": "curated"}
+{"id": "benign-std-074", "prompt": "Write a brief biography for a conference speaker.", "source": "curated"}
+{"id": "benign-std-075", "prompt": "Create an email template for onboarding new employees.", "source": "curated"}
+{"id": "benign-std-076", "prompt": "Solve the equation: 3x + 7 = 22.", "source": "curated"}
+{"id": "benign-std-077", "prompt": "What is the Pythagorean theorem?", "source": "curated"}
+{"id": "benign-std-078", "prompt": "Explain the concept of standard deviation in statistics.", "source": "curated"}
+{"id": "benign-std-079", "prompt": "What is the difference between an element and a compound?", "source": "curated"}
+{"id": "benign-std-080", "prompt": "How do vaccines work?", "source": "curated"}
+{"id": "benign-std-081", "prompt": "Calculate the area of a circle with radius 5 cm.", "source": "curated"}
+{"id": "benign-std-082", "prompt": "What is the difference between mitosis and meiosis?", "source": "curated"}
+{"id": "benign-std-083", "prompt": "Explain Newton's three laws of motion.", "source": "curated"}
+{"id": "benign-std-084", "prompt": "What is the pH scale and what does it measure?", "source": "curated"}
+{"id": "benign-std-085", "prompt": "How does natural selection drive evolution?", "source": "curated"}
+{"id": "benign-std-086", "prompt": "What is the Fibonacci sequence?", "source": "curated"}
+{"id": "benign-std-087", "prompt": "Explain the water cycle in simple terms.", "source": "curated"}
+{"id": "benign-std-088", "prompt": "What is the difference between speed and velocity?", "source": "curated"}
+{"id": "benign-std-089", "prompt": "How do antibiotics work?", "source": "curated"}
+{"id": "benign-std-090", "prompt": "What is the significance of the number pi?", "source": "curated"}
+{"id": "benign-std-091", "prompt": "Explain the concept of entropy in thermodynamics.", "source": "curated"}
+{"id": "benign-std-092", "prompt": "What is a prime number? List the first 10 prime numbers.", "source": "curated"}
+{"id": "benign-std-093", "prompt": "How does the human digestive system work?", "source": "curated"}
+{"id": "benign-std-094", "prompt": "What is the Doppler effect?", "source": "curated"}
+{"id": "benign-std-095", "prompt": "Explain the difference between renewable and non-renewable energy.", "source": "curated"}
+{"id": "benign-std-096", "prompt": "What is an algorithm? Give a simple example.", "source": "curated"}
+{"id": "benign-std-097", "prompt": "How do electric motors work?", "source": "curated"}
+{"id": "benign-std-098", "prompt": "What is the greenhouse effect?", "source": "curated"}
+{"id": "benign-std-099", "prompt": "Explain the concept of supply and demand in economics.", "source": "curated"}
+{"id": "benign-std-100", "prompt": "What is the difference between organic and inorganic chemistry?", "source": "curated"}
+{"id": "benign-std-101", "prompt": "Suggest 5 book recommendations for someone interested in history.", "source": "curated"}
+{"id": "benign-std-102", "prompt": "What are the health benefits of green tea?", "source": "curated"}
+{"id": "benign-std-103", "prompt": "Give me a recipe for chocolate chip cookies.", "source": "curated"}
+{"id": "benign-std-104", "prompt": "What are some effective study techniques for exams?", "source": "curated"}
+{"id": "benign-std-105", "prompt": "Suggest a workout routine for beginners.", "source": "curated"}
+{"id": "benign-std-106", "prompt": "What are the best practices for time management?", "source": "curated"}
+{"id": "benign-std-107", "prompt": "Recommend 5 movies from the science fiction genre.", "source": "curated"}
+{"id": "benign-std-108", "prompt": "How do I start a vegetable garden in a small space?", "source": "curated"}
+{"id": "benign-std-109", "prompt": "What are some tips for improving public speaking skills?", "source": "curated"}
+{"id": "benign-std-110", "prompt": "Suggest a meal plan for someone on a vegetarian diet.", "source": "curated"}
+{"id": "benign-std-111", "prompt": "How can I improve my sleep quality?", "source": "curated"}
+{"id": "benign-std-112", "prompt": "What are some fun indoor activities for a rainy day?", "source": "curated"}
+{"id": "benign-std-113", "prompt": "Give me travel tips for visiting Tokyo for the first time.", "source": "curated"}
+{"id": "benign-std-114", "prompt": "How do I brew the perfect cup of pour-over coffee?", "source": "curated"}
+{"id": "benign-std-115", "prompt": "Suggest 5 podcasts about technology and innovation.", "source": "curated"}
+{"id": "benign-std-116", "prompt": "What are some strategies for saving money on groceries?", "source": "curated"}
+{"id": "benign-std-117", "prompt": "How do I train a puppy to sit and stay?", "source": "curated"}
+{"id": "benign-std-118", "prompt": "Give me tips for taking better photographs with a smartphone.", "source": "curated"}
+{"id": "benign-std-119", "prompt": "What are some low-maintenance houseplants for beginners?", "source": "curated"}
+{"id": "benign-std-120", "prompt": "How do I plan a budget-friendly road trip?", "source": "curated"}
+{"id": "benign-std-121", "prompt": "What are the benefits of meditation and how do I start?", "source": "curated"}
+{"id": "benign-std-122", "prompt": "Suggest a board game for a group of 4 adults.", "source": "curated"}
+{"id": "benign-std-123", "prompt": "How do I organize a cluttered home office?", "source": "curated"}
+{"id": "benign-std-124", "prompt": "What are some creative date ideas for couples?", "source": "curated"}
+{"id": "benign-std-125", "prompt": "How do I start learning to play the guitar?", "source": "curated"}
+{"id": "benign-std-126", "prompt": "What is the difference between a startup and a small business?", "source": "curated"}
+{"id": "benign-std-127", "prompt": "Explain the concept of product-market fit.", "source": "curated"}
+{"id": "benign-std-128", "prompt": "What are the key components of a business plan?", "source": "curated"}
+{"id": "benign-std-129", "prompt": "How do I calculate the return on investment (ROI)?", "source": "curated"}
+{"id": "benign-std-130", "prompt": "What is agile project management?", "source": "curated"}
+{"id": "benign-std-131", "prompt": "Explain the difference between B2B and B2C marketing.", "source": "curated"}
+{"id": "benign-std-132", "prompt": "What are the most common financial statements and what do they show?", "source": "curated"}
+{"id": "benign-std-133", "prompt": "How do stock options work for employees?", "source": "curated"}
+{"id": "benign-std-134", "prompt": "What is a non-disclosure agreement (NDA)?", "source": "curated"}
+{"id": "benign-std-135", "prompt": "Explain the concept of minimum viable product (MVP).", "source": "curated"}
+{"id": "benign-std-136", "prompt": "What are the advantages and disadvantages of remote work?", "source": "curated"}
+{"id": "benign-std-137", "prompt": "How do you conduct a SWOT analysis?", "source": "curated"}
+{"id": "benign-std-138", "prompt": "What is the difference between revenue and profit?", "source": "curated"}
+{"id": "benign-std-139", "prompt": "Explain what venture capital is and how it works.", "source": "curated"}
+{"id": "benign-std-140", "prompt": "What are key performance indicators (KPIs)?", "source": "curated"}
+{"id": "benign-std-141", "prompt": "How do I write an effective project proposal?", "source": "curated"}
+{"id": "benign-std-142", "prompt": "What is the difference between a trademark and a patent?", "source": "curated"}
+{"id": "benign-std-143", "prompt": "Explain the concept of compound interest.", "source": "curated"}
+{"id": "benign-std-144", "prompt": "What are the steps to register a business?", "source": "curated"}
+{"id": "benign-std-145", "prompt": "How does supply chain management work?", "source": "curated"}
+{"id": "benign-std-146", "prompt": "What is the difference between a corporation and an LLC?", "source": "curated"}
+{"id": "benign-std-147", "prompt": "Explain the concept of market segmentation.", "source": "curated"}
+{"id": "benign-std-148", "prompt": "What are common negotiation strategies?", "source": "curated"}
+{"id": "benign-std-149", "prompt": "How do I create an effective elevator pitch?", "source": "curated"}
+{"id": "benign-std-150", "prompt": "What is the difference between gross margin and net margin?", "source": "curated"}
+{"id": "benign-std-151", "prompt": "What is the Socratic method of teaching?", "source": "curated"}
+{"id": "benign-std-152", "prompt": "How do I write an effective research paper?", "source": "curated"}
+{"id": "benign-std-153", "prompt": "What are the differences between qualitative and quantitative research?", "source": "curated"}
+{"id": "benign-std-154", "prompt": "Explain Bloom's taxonomy of learning objectives.", "source": "curated"}
+{"id": "benign-std-155", "prompt": "How do I properly cite sources in APA format?", "source": "curated"}
+{"id": "benign-std-156", "prompt": "What is the difference between a thesis and a dissertation?", "source": "curated"}
+{"id": "benign-std-157", "prompt": "How can I improve my reading comprehension skills?", "source": "curated"}
+{"id": "benign-std-158", "prompt": "What are mnemonic devices and how do they help with memorization?", "source": "curated"}
+{"id": "benign-std-159", "prompt": "Explain the scientific method in simple steps.", "source": "curated"}
+{"id": "benign-std-160", "prompt": "What is the difference between deductive and inductive reasoning?", "source": "curated"}
+{"id": "benign-std-161", "prompt": "How do I prepare for a standardized test like the GRE?", "source": "curated"}
+{"id": "benign-std-162", "prompt": "What is critical thinking and why is it important?", "source": "curated"}
+{"id": "benign-std-163", "prompt": "Explain the concept of growth mindset.", "source": "curated"}
+{"id": "benign-std-164", "prompt": "What are the benefits of peer review in academic writing?", "source": "curated"}
+{"id": "benign-std-165", "prompt": "How do I create effective flashcards for studying?", "source": "curated"}
+{"id": "benign-std-166", "prompt": "What is the difference between correlation and causation?", "source": "curated"}
+{"id": "benign-std-167", "prompt": "How do I structure an argumentative essay?", "source": "curated"}
+{"id": "benign-std-168", "prompt": "What are the most effective ways to learn a new language?", "source": "curated"}
+{"id": "benign-std-169", "prompt": "Explain the difference between primary and secondary sources.", "source": "curated"}
+{"id": "benign-std-170", "prompt": "How do I create a bibliography in MLA format?", "source": "curated"}
+{"id": "benign-std-171", "prompt": "What is project-based learning?", "source": "curated"}
+{"id": "benign-std-172", "prompt": "How do I give constructive feedback on someone's work?", "source": "curated"}
+{"id": "benign-std-173", "prompt": "What is the difference between formative and summative assessment?", "source": "curated"}
+{"id": "benign-std-174", "prompt": "How do I manage academic stress effectively?", "source": "curated"}
+{"id": "benign-std-175", "prompt": "What are the key elements of a good presentation?", "source": "curated"}
+{"id": "benign-std-176", "prompt": "What is the history of the Olympic Games?", "source": "curated"}
+{"id": "benign-std-177", "prompt": "How does a microwave oven work?", "source": "curated"}
+{"id": "benign-std-178", "prompt": "What are the rules of chess?", "source": "curated"}
+{"id": "benign-std-179", "prompt": "Explain how a compass works.", "source": "curated"}
+{"id": "benign-std-180", "prompt": "What is the difference between a hurricane, typhoon, and cyclone?", "source": "curated"}
+{"id": "benign-std-181", "prompt": "How do solar panels generate electricity?", "source": "curated"}
+{"id": "benign-std-182", "prompt": "What is blockchain technology?", "source": "curated"}
+{"id": "benign-std-183", "prompt": "How do noise-canceling headphones work?", "source": "curated"}
+{"id": "benign-std-184", "prompt": "What is the origin of the word 'serendipity'?", "source": "curated"}
+{"id": "benign-std-185", "prompt": "Explain the basics of color theory.", "source": "curated"}
+{"id": "benign-std-186", "prompt": "How does a refrigerator keep food cold?", "source": "curated"}
+{"id": "benign-std-187", "prompt": "What are the main differences between cats and dogs as pets?", "source": "curated"}
+{"id": "benign-std-188", "prompt": "How do submarines work?", "source": "curated"}
+{"id": "benign-std-189", "prompt": "What is the history of the internet?", "source": "curated"}
+{"id": "benign-std-190", "prompt": "How do touchscreens work?", "source": "curated"}
+{"id": "benign-std-191", "prompt": "What is the difference between a virus and a bacterium?", "source": "curated"}
+{"id": "benign-std-192", "prompt": "How does GPS navigation work?", "source": "curated"}
+{"id": "benign-std-193", "prompt": "What is the electoral college and how does it work?", "source": "curated"}
+{"id": "benign-std-194", "prompt": "How do 3D printers work?", "source": "curated"}
+{"id": "benign-std-195", "prompt": "What is the difference between a simile and a metaphor?", "source": "curated"}
+{"id": "benign-std-196", "prompt": "How does the postal system sort and deliver mail?", "source": "curated"}
+{"id": "benign-std-197", "prompt": "What are the basic rules of soccer?", "source": "curated"}
+{"id": "benign-std-198", "prompt": "How does Wi-Fi work?", "source": "curated"}
+{"id": "benign-std-199", "prompt": "What is the history of chocolate?", "source": "curated"}
+{"id": "benign-std-200", "prompt": "How do roller coasters work?", "source": "curated"}
+{"id": "benign-std-201", "prompt": "What is the difference between astronomy and astrology?", "source": "curated"}
+{"id": "benign-std-202", "prompt": "How do I set up a home Wi-Fi network?", "source": "curated"}
+{"id": "benign-std-203", "prompt": "What is the difference between a democracy and a republic?", "source": "curated"}
+{"id": "benign-std-204", "prompt": "Explain how a car engine works in simple terms.", "source": "curated"}
+{"id": "benign-std-205", "prompt": "What are the benefits of learning to code?", "source": "curated"}
+{"id": "benign-std-206", "prompt": "How do I write a good resume?", "source": "curated"}
+{"id": "benign-std-207", "prompt": "What is the difference between an introvert and an extrovert?", "source": "curated"}
+{"id": "benign-std-208", "prompt": "How do batteries store and release energy?", "source": "curated"}
+{"id": "benign-std-209", "prompt": "What is machine learning in simple terms?", "source": "curated"}
+{"id": "benign-std-210", "prompt": "How do I safely change a flat tire?", "source": "curated"}
+{"id": "benign-std-211", "prompt": "What is the water footprint of common foods?", "source": "curated"}
+{"id": "benign-std-212", "prompt": "How do I back up my computer files?", "source": "curated"}
+{"id": "benign-std-213", "prompt": "What is the difference between a recession and a depression?", "source": "curated"}
+{"id": "benign-std-214", "prompt": "How do bridges support heavy loads?", "source": "curated"}
+{"id": "benign-std-215", "prompt": "What are the health benefits of regular exercise?", "source": "curated"}
+{"id": "benign-std-216", "prompt": "How do I choose the right laptop for my needs?", "source": "curated"}
+{"id": "benign-std-217", "prompt": "What is the difference between weather forecasting and climate modeling?", "source": "curated"}
+{"id": "benign-std-218", "prompt": "How does a sewing machine work?", "source": "curated"}
+{"id": "benign-std-219", "prompt": "What are the basics of personal finance?", "source": "curated"}
+{"id": "benign-std-220", "prompt": "How do I write a letter of recommendation?", "source": "curated"}
+{"id": "benign-std-221", "prompt": "What is the history of the English language?", "source": "curated"}
+{"id": "benign-std-222", "prompt": "How do escalators work?", "source": "curated"}
+{"id": "benign-std-223", "prompt": "What is the difference between a lake and a pond?", "source": "curated"}
+{"id": "benign-std-224", "prompt": "How do I properly format a business letter?", "source": "curated"}
+{"id": "benign-std-225", "prompt": "What are the different types of clouds and what do they indicate?", "source": "curated"}
+{"id": "benign-std-226", "prompt": "What is the difference between a copyright and a trademark?", "source": "curated"}
+{"id": "benign-std-227", "prompt": "How do I write an effective abstract for a research paper?", "source": "curated"}
+{"id": "benign-std-228", "prompt": "What are the main types of renewable energy sources?", "source": "curated"}
+{"id": "benign-std-229", "prompt": "How does inflation affect purchasing power?", "source": "curated"}
+{"id": "benign-std-230", "prompt": "What is the difference between a symphony and a concerto?", "source": "curated"}
+{"id": "benign-std-231", "prompt": "How do I calculate the tip at a restaurant?", "source": "curated"}
+{"id": "benign-std-232", "prompt": "What are the main differences between Python and JavaScript?", "source": "curated"}
+{"id": "benign-std-233", "prompt": "How do I create a pivot table in Excel?", "source": "curated"}
+{"id": "benign-std-234", "prompt": "What is the difference between a comet and an asteroid?", "source": "curated"}
+{"id": "benign-std-235", "prompt": "How do hybrid cars save fuel?", "source": "curated"}
+{"id": "benign-std-236", "prompt": "What is the Turing test?", "source": "curated"}
+{"id": "benign-std-237", "prompt": "How do I convert Celsius to Fahrenheit?", "source": "curated"}
+{"id": "benign-std-238", "prompt": "What is the difference between an ocean and a sea?", "source": "curated"}
+{"id": "benign-std-239", "prompt": "How do I set up a basic home network?", "source": "curated"}
+{"id": "benign-std-240", "prompt": "What are the primary colors in light vs. paint?", "source": "curated"}
+{"id": "benign-std-241", "prompt": "How do I properly store fresh herbs?", "source": "curated"}
+{"id": "benign-std-242", "prompt": "What is the difference between a modem and a router?", "source": "curated"}
+{"id": "benign-std-243", "prompt": "How does a thermostat work?", "source": "curated"}
+{"id": "benign-std-244", "prompt": "What are the different blood types and why do they matter?", "source": "curated"}
+{"id": "benign-std-245", "prompt": "How do I file my taxes as a freelancer?", "source": "curated"}
+{"id": "benign-std-246", "prompt": "What is the difference between an epidemic and an endemic disease?", "source": "curated"}
+{"id": "benign-std-247", "prompt": "How do catalytic converters reduce car emissions?", "source": "curated"}
+{"id": "benign-std-248", "prompt": "What is the purpose of the International Space Station?", "source": "curated"}
+{"id": "benign-std-249", "prompt": "How do I properly sharpen a kitchen knife?", "source": "curated"}
+{"id": "benign-std-250", "prompt": "What is the difference between a memoir and an autobiography?", "source": "curated"}
