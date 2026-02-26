@@ -93,29 +93,48 @@ The NeMo Guardrails config at `nemo_config/config.yml` reads the model name from
 
 ## Dataset Preparation
 
-### Step 1: Generate sample data (for pipeline testing)
+### Step 1: Download source datasets
+
+Download the three source datasets into the `data/` folder:
+
+```bash
+# HEx-PHI — 300 plain-text harmful instructions across 10 categories
+# Requires HuggingFace login (gated dataset): huggingface-cli login
+huggingface-cli download LLM-Tuning-Safety/HEx-PHI --repo-type dataset --local-dir data/HEx-PHI
+
+# HarmBench — standard harmful behaviors (Mazeika et al. 2024)
+git clone https://github.com/centerforaisafety/HarmBench data/HarmBench-repo
+# Keep only the text behavior CSVs:
+mkdir -p data/HarmBench
+cp data/HarmBench-repo/data/behavior_datasets/harmbench_behaviors_text_*.csv data/HarmBench/
+cp data/HarmBench-repo/LICENSE data/HarmBench/
+rm -rf data/HarmBench-repo
+
+# LLMail-Inject — prompt injection challenge (Microsoft, 208K submissions)
+huggingface-cli download microsoft/llmail-inject-challenge --repo-type dataset --local-dir data/LLMail-Inject
+```
+
+### Step 2: Build the dataset JSONL files
 
 ```bash
 python datasets/build_dataset.py
 ```
 
-This creates 4 JSONL files with 5 sample prompts each (20 total) so you can validate the pipeline end-to-end before committing to a full API run.
+This reads from `data/` and writes 4 JSONL files (1,000 prompts total):
 
-### Step 2: Populate full datasets (for the real experiment)
-
-Replace the sample files with your real 250-prompt sets (1,000 total):
-
-| File | Source | Count | Notes |
+| File | Source | Count | How it's built |
 |---|---|---|---|
-| `datasets/adversarial_direct.jsonl` | [HEx-PHI](https://huggingface.co/datasets/LLM-Tuning-Safety/HEx-PHI) + [HarmBench](https://github.com/centerforaisafety/HarmBench) | 250 | HEx-PHI has 330 plain-text harmful instructions across 11 categories. Supplement with HarmBench (Mazeika et al. 2024) to reach 250 |
-| `datasets/adversarial_indirect.jsonl` | [LLMail-Inject](https://huggingface.co/datasets/microsoft/llmail-inject-challenge) | 250 | 208K attack submissions from 839 participants ([paper](https://arxiv.org/abs/2506.09956)). Sample 250 indirect injection prompts |
-| `datasets/benign_standard.jsonl` | Manual / standard QA | 250 | Normal user queries (factual questions, coding help, explanations) |
-| `datasets/benign_edgecase.jsonl` | Manual | 250 | Trigger words in safe contexts ("kill a process", "drop tables", "penetration testing") |
+| `datasets/adversarial_direct.jsonl` | [HEx-PHI](https://huggingface.co/datasets/LLM-Tuning-Safety/HEx-PHI) + [HarmBench](https://github.com/centerforaisafety/HarmBench) | 250 | 150 from HEx-PHI (15 per category, balanced) + 100 from HarmBench test set |
+| `datasets/adversarial_indirect.jsonl` | [LLMail-Inject](https://huggingface.co/datasets/microsoft/llmail-inject-challenge) | 250 | 250 confirmed-successful (`api_triggered`) prompt injection attacks, wrapped in realistic email-task contexts |
+| `datasets/benign_standard.jsonl` | Curated | 250 | Diverse standard queries across 10 categories (general knowledge, programming, writing, math/science, business, etc.) |
+| `datasets/benign_edgecase.jsonl` | Curated | 250 | Queries with trigger words in safe contexts (sysadmin commands, cybersecurity education, medical terms, legal topics, chemistry, etc.) |
 
-Each line must be valid JSON:
+All sampling uses a fixed seed (42) for reproducibility. Re-running `build_dataset.py` produces identical output.
+
+Each JSONL line has this format:
 
 ```json
-{"id": "adv-direct-001", "prompt": "the user prompt text", "source": "HEx-PHI"}
+{"id": "adv-direct-001", "prompt": "the user prompt text", "source": "HEx-PHI", "metadata": {}}
 ```
 
 The `id` and `source` fields are optional but recommended for traceability. The `prompt` field is required.
@@ -160,6 +179,35 @@ python runner.py --repetitions 3
 
 Each repetition **randomizes the configuration order** to mitigate time-of-day API latency confounds. With 3 repetitions you can report mean +/- std across runs.
 
+### Run a subset with `--offset` and `--limit`
+
+If your API quota is limited, you can run the experiment in daily batches. The dataset is deterministically shuffled (seed=42), so `--offset` and `--limit` always select the same slice regardless of when you run.
+
+```bash
+# Day 1: first 100 prompts
+python runner.py --offset 0 --limit 100
+
+# Day 2: next 100
+python runner.py --offset 100 --limit 100
+
+# Day 3: next 100
+python runner.py --offset 200 --limit 100
+
+# ... continue until all 1000 are done
+```
+
+Each run produces its own timestamped JSONL files in `results/`. When you run `python analysis.py`, it automatically merges **all** result files in the directory — so you do not need to concatenate anything manually. Just keep running batches until you've covered all 1000 prompts.
+
+You can combine `--offset`/`--limit` with other flags:
+
+```bash
+# Run only the control config for prompts 200-299
+python runner.py --config control --offset 200 --limit 100
+
+# Dry-run to verify which prompts a batch will cover
+python runner.py --dry-run --offset 300 --limit 100
+```
+
 ### All runner flags
 
 | Flag | Default | Description |
@@ -168,6 +216,8 @@ Each repetition **randomizes the configuration order** to mitigate time-of-day A
 | `--dry-run` | off | Load data and print plan without making any API calls |
 | `--repetitions N` | 1 | Number of full experiment runs (config order shuffled each time) |
 | `--seed N` | 42 | Random seed for config order shuffling (reproducibility) |
+| `--offset N` | 0 | Skip the first N test cases (applied after the deterministic shuffle) |
+| `--limit N` | all | Only run N test cases starting from `--offset` |
 
 ### What happens during a run
 
@@ -329,9 +379,14 @@ analysis.py                # Metrics computation, statistical tests, charts
 .env.example               # Template for environment variables
 requirements.txt           # Python dependencies
 
+data/                      # Source datasets (downloaded separately)
+  HEx-PHI/                 # 300 harmful instructions, 10 category CSVs
+  HarmBench/               # 400+ harmful behaviors, 3 CSVs + LICENSE
+  LLMail-Inject/           # Sampled prompt injection attacks + scenarios
+
 datasets/
   __init__.py              # Dataset loader (loads + shuffles with seed=42)
-  build_dataset.py         # Sample JSONL generator (5 prompts per category)
+  build_dataset.py         # Builds JSONL files from data/ source datasets
   adversarial_direct.jsonl # HEx-PHI + HarmBench prompts
   adversarial_indirect.jsonl # LLMail-Inject prompts
   benign_standard.jsonl    # Normal user queries
