@@ -57,7 +57,13 @@ class NeMoGuardrailsProvider(BaseProvider):
     name = "nemo_guardrails"
 
     def __init__(self):
+        import os
         self.model = config.TARGET_MODEL
+
+        # Ensure API keys are in the environment so NeMo/LangChain clients
+        # can pick them up automatically (NeMo doesn't resolve ${VAR} in YAML).
+        os.environ.setdefault("ANTHROPIC_API_KEY", config.ANTHROPIC_API_KEY)
+        os.environ.setdefault("OPENAI_API_KEY", config.OPENAI_API_KEY)
 
         # Load Colang config from nemo_config/
         rails_config = RailsConfig.from_path(str(config.NEMO_CONFIG_DIR))

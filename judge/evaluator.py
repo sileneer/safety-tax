@@ -108,7 +108,6 @@ class JudgeEvaluator:
                     {"role": "user", "content": user_msg},
                 ],
                 max_completion_tokens=256,
-                temperature=0,
             )
 
             raw = completion.choices[0].message.content.strip()

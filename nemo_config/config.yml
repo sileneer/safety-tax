@@ -10,15 +10,12 @@ models:
     engine: anthropic
     model: ${TARGET_MODEL:claude-sonnet-4-5-20250929}
     parameters:
-      api_key: ${ANTHROPIC_API_KEY}
       max_tokens: 1024
 
   # Embedding model for semantic similarity checks
   - type: embeddings
     engine: openai
     model: text-embedding-3-small
-    parameters:
-      api_key: ${OPENAI_API_KEY}
 
 rails:
   input:
