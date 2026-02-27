@@ -129,13 +129,28 @@ class NeMoGuardrailsProvider(BaseProvider):
             if response is None:
                 raise last_exc  # type: ignore[misc]
 
-            # Extract content — response may be a dict or an object
-            if isinstance(response, dict):
+            # Extract content — response may be a plain string, a dict,
+            # or a GenerationResponse object (when GenerationOptions are used).
+            if isinstance(response, str):
+                raw_output = response
+            elif isinstance(response, dict):
                 raw_output = response.get("content", "")
+            elif hasattr(response, "response"):
+                # GenerationResponse: .response is a list of message dicts
+                resp_msgs = response.response
+                if isinstance(resp_msgs, list) and resp_msgs:
+                    last_msg = resp_msgs[-1]
+                    raw_output = last_msg.get("content", "") if isinstance(last_msg, dict) else str(last_msg)
+                elif isinstance(resp_msgs, str):
+                    raw_output = resp_msgs
+                else:
+                    raw_output = ""
+                    logger.warning("Unexpected NeMo .response type: %s", type(resp_msgs))
             elif hasattr(response, "content"):
                 raw_output = response.content or ""
             else:
                 raw_output = str(response)
+                logger.warning("NeMo response fell through to str(): type=%s", type(response))
 
             # Detect blocking via NeMo's structured data:
             # 1. Check if an input rail was triggered (returned in output_vars)

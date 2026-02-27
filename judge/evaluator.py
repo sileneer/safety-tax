@@ -110,7 +110,11 @@ class JudgeEvaluator:
                 max_completion_tokens=256,
             )
 
-            raw = completion.choices[0].message.content.strip()
+            raw = completion.choices[0].message.content or ""
+            raw = raw.strip()
+            if not raw:
+                raise ValueError("Judge model returned empty response")
+
             parsed = json.loads(raw)
             return JudgeVerdict(
                 classification=parsed["classification"],
