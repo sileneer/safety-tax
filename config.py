@@ -23,12 +23,15 @@ TARGET_MODEL = os.getenv("TARGET_MODEL", "claude-sonnet-4-5-20250929")
 JUDGE_MODEL = os.getenv("JUDGE_MODEL", "gpt-5-2025-08-07")
 
 # ── Concurrency ───────────────────────────────────────────────────────────────
-MAX_CONCURRENCY = int(os.getenv("MAX_CONCURRENCY", "2"))
+MAX_CONCURRENCY = int(os.getenv("MAX_CONCURRENCY", "1"))
 
 # ── Rate limiting ─────────────────────────────────────────────────────────────
-# Minimum seconds between provider API calls (e.g. 15 = ~4 req/min, safely
-# under the Anthropic 5 req/min org limit).
-REQUEST_DELAY = float(os.getenv("REQUEST_DELAY", "15"))
+# Minimum seconds between provider API calls.
+# NeMo Guardrails makes ~3 LLM calls per test case (input check + generation
+# + output check), so 40s between test cases keeps us under the Anthropic
+# 5 req/min limit.  Control and Guardrails AI only make 1-2 calls, so this
+# is conservative for them — override with env var for faster runs.
+REQUEST_DELAY = float(os.getenv("REQUEST_DELAY", "40"))
 
 # ── Dataset sizes (per the experiment plan: n = 1000) ─────────────────────────
 ADVERSARIAL_DIRECT_COUNT = 250

@@ -8,6 +8,7 @@ requests before or after they reach the model.
 
 from __future__ import annotations
 
+import asyncio
 import logging
 
 from nemoguardrails import RailsConfig, LLMRails
@@ -22,6 +23,11 @@ _COLANG_REFUSAL_STRINGS = [
     "I'm sorry, I can't help with that request as it violates safety guidelines.",
     "I can't assist with that request.",
 ]
+
+# Retry settings for rate-limit (429) errors.  NeMo makes ~3 internal LLM
+# calls per test case, which can trigger Anthropic's 5 req/min limit.
+_MAX_RETRIES = 5
+_RETRY_BASE_DELAY = 30  # seconds — first retry waits 30s, then 60s, etc.
 
 # Try to import GenerationOptions — path may vary across NeMo versions
 try:
@@ -51,6 +57,12 @@ def _get_log_data(response, key: str, default=None):
         return log.get(key, default)
     else:
         return getattr(log, key, default)
+
+
+def _is_rate_limit_error(exc: Exception) -> bool:
+    """Check if an exception is a rate-limit (429) error from any layer."""
+    msg = str(exc).lower()
+    return "429" in msg or "rate_limit" in msg or "rate limit" in msg
 
 
 class NeMoGuardrailsProvider(BaseProvider):
@@ -93,7 +105,29 @@ class NeMoGuardrailsProvider(BaseProvider):
             if self.generation_options is not None:
                 kwargs["options"] = self.generation_options
 
-            response = await self.rails.generate_async(**kwargs)
+            # Retry with exponential backoff on rate-limit errors.
+            # NeMo internally fires ~3 LLM calls per request, which can
+            # burst past the Anthropic rate limit even with our outer throttle.
+            response = None
+            last_exc = None
+            for attempt in range(_MAX_RETRIES + 1):
+                try:
+                    response = await self.rails.generate_async(**kwargs)
+                    break
+                except Exception as exc:
+                    if _is_rate_limit_error(exc) and attempt < _MAX_RETRIES:
+                        wait = _RETRY_BASE_DELAY * (2 ** attempt)
+                        logger.warning(
+                            "Rate-limited on attempt %d/%d, retrying in %ds: %s",
+                            attempt + 1, _MAX_RETRIES + 1, wait, exc,
+                        )
+                        await asyncio.sleep(wait)
+                        last_exc = exc
+                    else:
+                        raise
+
+            if response is None:
+                raise last_exc  # type: ignore[misc]
 
             # Extract content — response may be a dict or an object
             if isinstance(response, dict):
