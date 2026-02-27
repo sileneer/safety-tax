@@ -29,17 +29,6 @@ _COLANG_REFUSAL_STRINGS = [
 _MAX_RETRIES = 5
 _RETRY_BASE_DELAY = 30  # seconds — first retry waits 30s, then 60s, etc.
 
-# Try to import GenerationOptions — path may vary across NeMo versions
-try:
-    from nemoguardrails.rails.llm.options import GenerationOptions
-    _HAS_GENERATION_OPTIONS = True
-except ImportError:
-    _HAS_GENERATION_OPTIONS = False
-    logger.warning(
-        "Could not import GenerationOptions from nemoguardrails. "
-        "Token counts and rail activation logs will not be available."
-    )
-
 
 def _get_log_data(response, key: str, default=None):
     """Extract log data from a NeMo response, handling both dict and object forms."""
@@ -81,18 +70,18 @@ class NeMoGuardrailsProvider(BaseProvider):
         rails_config = RailsConfig.from_path(str(config.NEMO_CONFIG_DIR))
         self.rails = LLMRails(config=rails_config)
 
-        # Enable detailed logging so we can extract token counts and rail activations
-        self.generation_options = None
-        if _HAS_GENERATION_OPTIONS:
-            self.generation_options = GenerationOptions(
-                log={
-                    "activated_rails": True,
-                    "llm_calls": True,
-                    "internal_events": True,
-                    "stats": True,
-                },
-                output_vars=["triggered_input_rail"],
-            )
+        # Enable detailed logging so we can extract token counts and rail activations.
+        # NeMo accepts options as a plain dict; GenerationOptions may not forward
+        # the `log` key, so we use a dict to match the documented API.
+        self.generation_options = {
+            "output_vars": ["triggered_input_rail"],
+            "log": {
+                "activated_rails": True,
+                "llm_calls": True,
+                "internal_events": True,
+                "stats": True,
+            },
+        }
 
     async def process(self, prompt: str) -> ProviderResult:
         start = self._timer()
@@ -173,12 +162,35 @@ class NeMoGuardrailsProvider(BaseProvider):
 
             blocked = bool(triggered_input_rail) or is_colang_refusal
 
-            # Extract token counts from LLM call logs when available
-            llm_calls = _get_log_data(response, "llm_calls", []) or []
-            for call in llm_calls:
-                if isinstance(call, dict):
-                    input_tokens += call.get("prompt_tokens", 0) or call.get("input_tokens", 0) or 0
-                    output_tokens += call.get("completion_tokens", 0) or call.get("output_tokens", 0) or 0
+            # Extract token counts from the NeMo response log.
+            # Primary: use log.stats aggregate totals (most reliable).
+            # Fallback: iterate log.llm_calls entries.
+            log = None
+            if hasattr(response, "log"):
+                log = response.log
+            elif isinstance(response, dict):
+                log = response.get("log")
+
+            if log is not None:
+                # Try stats aggregate first
+                stats = getattr(log, "stats", None) if not isinstance(log, dict) else (log.get("stats") if isinstance(log, dict) else None)
+                if stats is not None:
+                    if isinstance(stats, dict):
+                        input_tokens = stats.get("llm_calls_total_prompt_tokens", 0) or 0
+                        output_tokens = stats.get("llm_calls_total_completion_tokens", 0) or 0
+                    else:
+                        input_tokens = getattr(stats, "llm_calls_total_prompt_tokens", 0) or 0
+                        output_tokens = getattr(stats, "llm_calls_total_completion_tokens", 0) or 0
+                else:
+                    # Fallback: iterate llm_calls entries (objects or dicts)
+                    llm_calls_list = getattr(log, "llm_calls", None) if not isinstance(log, dict) else log.get("llm_calls")
+                    for call in (llm_calls_list or []):
+                        if isinstance(call, dict):
+                            input_tokens += call.get("prompt_tokens", 0) or 0
+                            output_tokens += call.get("completion_tokens", 0) or 0
+                        else:
+                            input_tokens += getattr(call, "prompt_tokens", 0) or 0
+                            output_tokens += getattr(call, "completion_tokens", 0) or 0
 
             return ProviderResult(
                 raw_output=raw_output,
