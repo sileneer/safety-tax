@@ -193,7 +193,26 @@ python runner.py --offset 100 --limit 100
 # Day 3: next 100
 python runner.py --offset 200 --limit 100
 
-# ... continue until all 1000 are done
+# Day 4: next 100
+python runner.py --offset 300 --limit 100
+
+# Day 5: next 100
+python runner.py --offset 400 --limit 100
+
+# Day 6: next 100
+python runner.py --offset 500 --limit 100
+
+# Day 7: next 100
+python runner.py --offset 600 --limit 100
+
+# Day 8: next 100
+python runner.py --offset 700 --limit 100
+
+# Day 9: next 100
+python runner.py --offset 800 --limit 100
+
+# Day 10: last 100
+python runner.py --offset 900 --limit 100
 ```
 
 Each run produces its own timestamped JSONL files in `results/`. When you run `python analysis.py`, it automatically merges **all** result files in the directory — so you do not need to concatenate anything manually. Just keep running batches until you've covered all 1000 prompts.
