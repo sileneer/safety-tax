@@ -50,11 +50,6 @@ MANIFEST
 # Jupyter
 .ipynb_checkpoints/
 
-# Results (regenerated per run)
-results/*.jsonl
-results/*.json
-results/plots/
-
 # IDE
 .vscode/
 .idea/

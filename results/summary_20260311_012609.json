@@ -1,0 +1,21 @@
+{
+  "timestamp": "20260311_012609",
+  "repetition": 1,
+  "total_repetitions": 1,
+  "config_run_order": [
+    "guardrails_ai",
+    "control",
+    "nemo_guardrails"
+  ],
+  "total_cases": 100,
+  "configurations": [
+    "guardrails_ai",
+    "control",
+    "nemo_guardrails"
+  ],
+  "files": {
+    "guardrails_ai": "guardrails_ai_20260311_012609.jsonl",
+    "control": "control_20260311_012609.jsonl",
+    "nemo_guardrails": "nemo_guardrails_20260311_012609.jsonl"
+  }
+}
